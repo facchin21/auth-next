@@ -10,11 +10,13 @@ export const message = {
         userNotFound: "Usuario no encontrado",
         invalidPassword: "Contraseña incorrecta",
         invalidToken: "Token invalido",
+        tokenNotFound : "Token no encontrado",
     },
     success:{
         userCreatted: "Usuario creado con exito!",
         userLogged : "Usuario logeado con exito!",
         emailSent: "Correo enviado con exito",
         passwordChanged: "Contraseña cambiada con exito",
+        authorized: "Autorizado",
     }
 }
