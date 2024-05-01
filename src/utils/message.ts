@@ -13,5 +13,6 @@ export const message = {
     success:{
         userCreatted: "Usuario creado con exito!",
         userLogged : "Usuario logeado con exito!",
+        emailSent: "Correo enviado con exito",
     }
 }
