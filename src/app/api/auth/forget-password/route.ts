@@ -38,7 +38,7 @@ export async function POST( request: NextRequest) {
         
         await resend.emails.send({
             from: "onboarding@resend.dev",
-            to: "ferminfacchinq@gmail.com",
+            to: email,
             subject: "Recuperar contraseña",
             html: `<a href="${forgetUrl}">Recuperar contraseña</a>`
         })
