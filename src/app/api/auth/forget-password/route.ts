@@ -34,7 +34,7 @@ export async function POST( request: NextRequest) {
             expiresIn: 86400 // 24 horas   
         })
 
-        const forgetUrl = "http://localhost:3000/change-password?token=+token=${token}";
+        const forgetUrl = `http://localhost:3000/change-password?token=+token=${token}`;
         
         await resend.emails.send({
             from: "onboarding@resend.dev",
