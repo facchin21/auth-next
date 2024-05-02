@@ -1,57 +1,53 @@
-import { message } from "@/utils/message";
-import { headers } from "next/headers";
+import { messages } from "@/utils/messages";
 import { NextResponse } from "next/server";
-import jwt from 'jsonwebtoken';
-import { connectDB } from "@/libs/mongodb";
+import { headers } from "next/headers";
+import jwt from "jsonwebtoken";
+import { connectMongoDB } from "@/libs/mongodb";
 import User from "@/models/User";
 
 export async function GET() {
-    try{
-        const headerList = headers()
-        const token = headerList.get("token")
+  try {
+    const headersList = headers();
+    const token = headersList.get("token");
 
-        // Valido que alla token
-        if(!token){
-            return NextResponse.json(
-                {message: message.error.tokenNotFound},
-                {status: 401}
-            )
-        }
-
-        try{
-            const isTokenValid = jwt.verify(token, "secreto")
-            // @ts-ignore
-            const { data } = isTokenValid;
-            
-            await connectDB()
-            const userFind = await User.findById(data._id)
-
-            // Verificamos que exista el usuario
-            if(!userFind){
-                return NextResponse.json(
-                    {message: message.error.userNotFound},
-                    {status: 401}
-                )
-            }
-
-            return NextResponse.json(
-                {   isAuthorized: true,
-                    message : message.success.authorized
-                },
-                {status: 200}
-            )
-
-
-        }catch(error){
-            return NextResponse.json(
-                {message: message.error.invalidToken},
-                {status: 401}
-            )
-        }
-    }catch(error){
-        return NextResponse.json(
-            {message: message.error.default},
-            {status: 500}
-        )
+    // Valido que haya token
+    if (!token) {
+      return NextResponse.json(
+        { message: messages.error.notAuthorized },
+        { status: 400 }
+      );
     }
+
+    try {
+      const isTokenValid = jwt.verify(token, "secreto");
+      // @ts-ignore
+      const { data } = isTokenValid;
+
+      await connectMongoDB();
+      const userFind = await User.findById(data._id);
+
+      // Verificamos que exista el usuario
+      if (!userFind) {
+        return NextResponse.json(
+          { message: messages.error.userNotFound },
+          { status: 400 }
+        );
+      }
+
+      return NextResponse.json(
+        { isAuthorized: true, message: messages.success.authorized },
+        { status: 200 }
+      );
+    } catch (error) {
+      return NextResponse.json(
+        { message: messages.error.tokenNotValid, error },
+        { status: 400 }
+      );
+    }
+  } catch (error) {
+    return NextResponse.json(
+      { message: messages.error.default, error },
+      { status: 400 }
+    );
+  }
 }

@@ -1,21 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
-import { connectDB } from "@/libs/mongodb";
-import { message } from "@/utils/message";
+import { connectMongoDB } from "@/libs/mongodb";
+import { messages } from "@/utils/messages";
 import User from "@/models/User";
 
-export async function GET(request : NextRequest){
-    try{
-        await connectDB()
-        const users = await User.find()
+export async function GET(request: NextRequest) {
+  try {
+    await connectMongoDB();
+    const users = await User.find();
 
-        return NextResponse.json(
-            {users},
-            {status: 200}
-        )
-    }catch(error){
-        return NextResponse.json(
-            {message: message.error.default},
-            {status: 500}
-        )
-    }
+    return NextResponse.json({ users }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { message: messages.error.default, error },
+      { status: 500 }
+    );
+  }
 }
