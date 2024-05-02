@@ -1,4 +1,6 @@
 # Login + Register + Change Password en NextJs 13
+
+## El proyecto fue creado para practicar Tecnologias siguendo los pasos del siguiente video:
 Link al video [Aca!](https://www.youtube.com/watch?v=-vZIzDHkR-g&feature=youtu.be&ab_channel=Mauro)
 
 ## Preparando el proyecto
@@ -16,8 +18,8 @@ Endpoint para iniciar sesión con tu cuenta
 #### Body:
 ```
 {
-  email: 'mauro123@gmail.com,
-  password: '123'
+  email: 'ferminfacchinq@gmail.com,
+  password: '12345'
 }
 ```
 <hr />
@@ -27,9 +29,9 @@ Endpoint para crear una nueva cuenta
 #### Body:
 ```
 {
-  email: 'mauro1234@gmail.com,
-  password: '1234',
-  confirmPassword: '1234'
+  email: 'ferminfacchinq@gmail.com,
+  password: '12345',
+  confirmPassword: '12345'
 }
 ```
 
@@ -40,7 +42,7 @@ Endpoint para enviar el correo para cambiar la password
 #### Body:
 ```
 {
-  email: 'mauro1234@gmail.com,
+  email: ferminfacchinq@gmail.com,
 }
 ```
 <hr />
